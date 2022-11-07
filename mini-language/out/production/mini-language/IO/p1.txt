@@ -1,0 +1,12 @@
+let integer: nr1;
+read(nr1);
+let integer: nr2;
+read(nr2);
+let integer: nr3;
+read(nr3);
+if (nr1 >= nr2 and nr1 >= nr3)
+write(nr1);
+else (nr2 >= nr1 and nr2 >= nr3)
+write(nr2);
+if (nr3 >= nr1 and nr3 >= nr2)
+write(nr3);

@@ -21,30 +21,45 @@ public class SymbolTable {
         return ASCIISum % size;
     }
 
-    public Position add(String term) {
-        Position position = findTermPosition(term);
+    public Pair add(String term) {
+        Pair position = findTermPosition(term);
         if (Objects.nonNull(position)) {
             return position;
         }
 
         int key = this.hash(term);
         this.table.get(key).add(term);
-        return new Position(key, table.get(key).size() - 1);
+        return new Pair(key, table.get(key).size() - 1);
     }
 
 
-    public Position findTermPosition(String term) {
+    public Pair findTermPosition(String term) {
         int key = this.hash(term);
         if (!this.table.get(key).isEmpty()) {
             List<String> collisions = this.table.get(key);
 
             for (int i = 0; i < collisions.size(); i++) {
                 if (collisions.get(i).equals(term)) {
-                    return new Position(key, i);
+                    return new Pair(key, i);
                 }
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("");
+        for (int row = 0; row < table.size(); ++row) {
+            if (table.get(row).size() > 0) {
+                int finalRow = row;
+                for (int col = 0; col < table.get(row).size(); ++col) {
+                    result.append(table.get(finalRow).get(col) + " - <" + finalRow + ", " + col + ">\n");
+                }
+            }
+        }
+
+        return result.toString();
     }
 }
 

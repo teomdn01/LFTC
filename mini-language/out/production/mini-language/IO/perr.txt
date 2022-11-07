@@ -1,0 +1,4 @@
+#
+let integer: number = 0;
+let integer: 123variable = 0;
+#

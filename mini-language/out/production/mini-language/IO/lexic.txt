@@ -1,0 +1,35 @@
+Alphabet:
+    lowercase letters ::= a | b | c | ... | z
+    uppercase letters ::= A | B | C | ... | Z 
+    underline character ::= _
+    digits = 0 | 1 | 2 | ... | 9
+
+Lexic:
+    Special Symbols:
+        operators ::= + | - | * | / | = | == | > | < | >= | <= | and | or | % | += | -= | *= | /= | %=
+        separators ::= space | ; | : | ( | ) | [ | ] | { | }
+        key words ::= let | integer | char | string | bool | read | write | if | else | while | start | end
+
+    Identifiers:
+        <lowercase_letter> ::= a | b | c | ... | z
+        <uppercase_letter> ::= A | B | C | ... | Z
+        <letter> = <lowercase_letter> | <uppercase_letter>
+        <non_zero_digit> ::= 1 | 2 | ... | 9
+        <digit> ::= 0 | <non_zero_digit>
+        <seq_of_letters> ::= <letter> | <seq_of_letters>letter
+        <identifier> ::= <lowercase_letter> | <seq_of_letters>
+
+    Constants:
+        bool
+            <bool> ::= True | False
+        char
+            <char> ::= <'letter'> | <'digit'>
+        string
+            <string> ::= <char> | <string><char>
+            <constchar> ::= <"string">
+        integer
+            <sign> ::= + | -
+            <digit_seq> ::= <digit> | <digit><digit_seq>
+            <non_zero_digit_seq> ::= <non_zero_digit> | <non_zero_digit><digit_seq>
+            <integer> = 0 | <non_zero_digit_seq> | <sign><non_zero_digit_seq>
+
