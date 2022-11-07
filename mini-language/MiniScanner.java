@@ -4,9 +4,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class MiniScanner {
-    private final ArrayList<String> OPERATORS = new ArrayList<>();
-    private final ArrayList<String> SEPARATORS = new ArrayList<>();
-    private final ArrayList<String> RESERVED_WORDS = new ArrayList<>();
+    private final List<String> OPERATORS = new ArrayList<>();
+    private final List<String> SEPARATORS = new ArrayList<>();
+    private final List<String> RESERVED_WORDS = new ArrayList<>();
     private final String problemFilePath;
     private final SymbolTable symbolTable;
     private final PIF pif;
@@ -147,8 +147,8 @@ public class MiniScanner {
 
     private static boolean isConstant(String token) {
         return token.matches("TRUE|FALSE") // boolean
-                || token.matches("^(POZ@0|(NEG|POZ)@[1-9]+[0-9]*)@$") // integers
-                || token.matches("^\"[a-z|A-Z|0-9| |_]+\"$"); // non-empty strings containing letters, digits or _
+                || token.matches("^(POZ0|(NEG|POZ)[1-9]+[0-9]*)$") // integers
+                || token.matches("^\"[a-z|A-Z|0-9| |_]+\"$"); // non-empty strings containing letters, spaces, digits or _
     }
 
     public void printSymbolTable(String outputFile) {

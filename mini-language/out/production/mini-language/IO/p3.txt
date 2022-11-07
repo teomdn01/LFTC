@@ -1,13 +1,13 @@
 #
 let integer: size;
 read(size);
-let integer: counter = POZ@0@;
-let integer: sum = POZ@0@;
+let integer: counter = POZ0;
+let integer: sum = POZ0;
 let integer: number;
 while (counter < size) {
 read(number);
 sum += number;
-counter += POZ@1@;
+counter += POZ1;
 }
 write(sum);
 #

@@ -2,16 +2,16 @@
 let integer: x;
 let integer: d;
 let integer: isPrime;
-d = POZ@2@;
-isPrime = POZ@1@;
+d = POZ2;
+isPrime = POZ1;
 read(x);
 while (d * d <= x) {
-if (x % d == POZ@0@) {
-isPrime = POZ@0@;
+if (x % d == POZ0) {
+isPrime = POZ0;
 };
-d = d + POZ@1@;
+d = d + POZ1;
 }
-if (isPrime == POZ@0@) {
+if (isPrime == POZ0) {
 write("is not prime");
 }
 else {

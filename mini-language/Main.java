@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        String baseFilename = "perr";
+        String baseFilename = "p2";
         MiniScanner scanner = new MiniScanner("IO/" + baseFilename + ".txt");
         scanner.scan();
         scanner.printSymbolTable("IO/" + baseFilename + "ST.txt");
