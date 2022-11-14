@@ -1,0 +1,4 @@
+A;B;C;
+a;b;c;
+A->c->B;B->b->c;A->a->A;A->a->B;
+C;
