@@ -26,10 +26,14 @@ and the second element is the position of the id/const inside the SymbolTable (o
     In order to identify integer constants and identifiers, we defined the following finite automatas:
     
 ## Input Lab FA:
-set of states: A B C 
+set of states: A B C
+
 symbols: 0 1 
+
 starting state: A 
+
 final states: B C 
+
 transitions: 
 (A,0) -> B 
 (A,1) -> C
@@ -37,10 +41,15 @@ transitions:
 (B,1) -> C 
 
 nonterminals: B, C, DFA
+
 terminals: “0”, “1”
+
 B = “0” {“0”}
+
 C = B “1” | “1”
+
 DFA = B | C
+
 DFA = (“0” {“0”} [“1”]) | “1”
 
 
