@@ -24,6 +24,26 @@ and the second element is the position of the id/const inside the SymbolTable (o
 
 # Finite Automata:
     In order to identify integer constants and identifiers, we defined the following finite automatas:
+    
+## Input Lab FA:
+set of states: A B C 
+symbols: 0 1 
+starting state: A 
+final states: B C 
+transitions: 
+(A,0) -> B 
+(A,1) -> C
+(B,0) -> B
+(B,1) -> C 
+
+nonterminals: B, C, DFA
+terminals: “0”, “1”
+B = “0” {“0”}
+C = B “1” | “1”
+DFA = B | C
+DFA = (“0” {“0”} [“1”]) | “1”
+
+
 ## Identfier:
         Q : {A;B;}
         SIGMA : {a;b;c;d;e;f;g;h;i;j;k;l;m;n;o;p;q;r;s;t;u;v;w;x;y;z;A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z;_;0;1;2;3;4;5;6;7;8;9;}
@@ -48,4 +68,4 @@ and the second element is the position of the id/const inside the SymbolTable (o
         A->P->B;A->N->B;A->0->C;A->1->C;A->2->C;A->3->C;A->4->C;A->5->C;A->6->C;A->7->C;A->8->C;A->9->C;B->0->C;B->1->C;B->2->C;B->3->C;B->4->C;B->5->C;B->6->C;
         B->7->C;B->8->C;B->9->C;C->0->C;C->1->C;C->2->C;C->3->C;C->4->C;C->5->C;C->6->C;C->7->C;C->8->C;C->9->C;}
     
-    We check the sequencies against these deterministic finite automatas. 
+We check the sequencies against these deterministic finite automatas. 
