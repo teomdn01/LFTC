@@ -77,4 +77,17 @@ public class FiniteAutomaton {
 
         return this.finalStates.contains(currentState);
     }
+
+    public void printData() {
+        System.out.println("Initial states: { " + Arrays.toString(states.toArray()) + " }");
+        System.out.println("Alphabet: { " + Arrays.toString(alphabet.toArray()) + " }");
+        System.out.println("Transitions: ");
+        for (Map.Entry<String, Set<Pair<String, String>>> entry : transitions.entrySet()) {
+            System.out.println(entry.getKey() + ": " + Arrays.toString(entry.getValue().toArray()));
+        }
+        System.out.println("Initial state: " + initialState);
+        System.out.println("Final states: { " + Arrays.toString(finalStates.toArray()) + " }");
+        System.out.println("======================================");
+        System.out.println();
+    }
 }

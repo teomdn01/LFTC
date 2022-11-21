@@ -10,12 +10,16 @@ public class MiniScanner {
     private final String problemFilePath;
     private final SymbolTable symbolTable;
     private final PIF pif;
+    private final FiniteAutomaton identifierFA;
+    private final FiniteAutomaton constantFA;
 
-    public MiniScanner(String problemFilePath) {
+    public MiniScanner(String problemFilePath, FiniteAutomaton identifierFA, FiniteAutomaton constantFA) {
         this.problemFilePath = problemFilePath;
         this.symbolTable = new SymbolTable(256);
         initializeLexic("IO/token.txt");
         this.pif = new PIF();
+        this.identifierFA = identifierFA;
+        this.constantFA = constantFA;
     }
 
     private void initializeLexic(String tokenFilePath) {
@@ -112,8 +116,6 @@ public class MiniScanner {
     public void scan() {
         AtomicBoolean foundLexicalError = new AtomicBoolean(false);
         List<Pair<String, Integer>> tokens = this.tokenize();
-        FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
-        FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
         tokens.forEach(tokenPair -> {
             String token = tokenPair.getFirst();
             if (this.RESERVED_WORDS.contains(token)) {
