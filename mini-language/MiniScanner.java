@@ -112,6 +112,8 @@ public class MiniScanner {
     public void scan() {
         AtomicBoolean foundLexicalError = new AtomicBoolean(false);
         List<Pair<String, Integer>> tokens = this.tokenize();
+        FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
+        FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
         tokens.forEach(tokenPair -> {
             String token = tokenPair.getFirst();
             if (this.RESERVED_WORDS.contains(token)) {
@@ -123,9 +125,13 @@ public class MiniScanner {
             else if (this.OPERATORS.contains(token)) {
                 this.pif.add(new Pair<>(token, new Pair<>(-1, -1)), -1);
             }
-            else if (isIdentifier(token)) {
+            else if (identifierFA.isAccepted(token)) {
                 this.symbolTable.add(token);
                 this.pif.add(new Pair<>(token, symbolTable.findTermPosition(token)), 0);
+            }
+            else if (constantFA.isAccepted(token)) {
+                this.symbolTable.add(token);
+                this.pif.add(new Pair<>(token, symbolTable.findTermPosition(token)), 1);
             }
             else if (isConstant(token)) {
                 this.symbolTable.add(token);
@@ -147,7 +153,7 @@ public class MiniScanner {
 
     private static boolean isConstant(String token) {
         return token.matches("TRUE|FALSE") // boolean
-                || token.matches("^(POZ0|(NEG|POZ)[1-9]+[0-9]*)$") // integers
+               // || token.matches("^(P0|(N|P)[1-9]+[0-9]*)$") // integers
                 || token.matches("^\"[a-z|A-Z|0-9| |_]+\"$"); // non-empty strings containing letters, spaces, digits or _
     }
 

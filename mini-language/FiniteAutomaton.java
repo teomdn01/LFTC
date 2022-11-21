@@ -48,8 +48,33 @@ public class FiniteAutomaton {
         return true;
     }
 
-    public boolean isAccepted() {
-        //TODO: define the acceptance criteria
-        return true;
+    public boolean isAccepted(String sequence) {
+        if (!this.isDFA) {
+            return false;
+        }
+
+        String currentState = this.initialState;
+        for (int i = 0; i < sequence.length(); i++) {
+            String currentSymbol = sequence.substring(i, i + 1);
+            Set<Pair<String, String>> nextTransitions = this.transitions.get(currentState);
+            if (nextTransitions == null) {
+                return false;
+            }
+
+            boolean foundNext = false;
+            for (Pair<String, String> stateSymbolPair : nextTransitions) {
+                if (stateSymbolPair.getSecond().equals(currentSymbol)) {
+                    currentState = stateSymbolPair.getFirst();
+                    foundNext = true;
+                    break;
+                }
+            }
+
+            if (!foundNext) {
+                return false;
+            }
+        }
+
+        return this.finalStates.contains(currentState);
     }
 }
