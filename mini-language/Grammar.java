@@ -14,9 +14,11 @@ public class Grammar {
     private Set<String> terminals;
     private String startingSymbol;
     private HashMap<List<String>, List<List<String>>> productions = new HashMap<>();
+    private List<Pair<String, List<String>>> productionCodes;
 
     public Grammar(String filename) {
         this.loadFromFile(filename);
+        this.assignCodesToProductions();
     }
 
     public Set<String> getNonTerminals() {
@@ -83,5 +85,14 @@ public class Grammar {
         }
 
         return true;
+    }
+
+    private void assignCodesToProductions() {
+        this.productionCodes = new ArrayList<>();
+        this.productions.forEach((LHS, RHSSet) -> RHSSet.forEach(RHS -> this.productionCodes.add(new Pair<>(LHS.get(0), RHS))));
+    }
+
+    public int findCodeForProduction(Pair<String, List<String>> production) {
+        return productionCodes.indexOf(production);
     }
 }

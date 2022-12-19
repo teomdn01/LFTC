@@ -1,8 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
        // FiniteAutomaton faLab = new FiniteAutomaton("IO/FA.in");
         Grammar grammar = new Grammar("IO/G3.txt");
@@ -14,7 +17,10 @@ public class Main {
         FirstSet firstSet = new FirstSet(grammar);
         FollowSet followSet = new FollowSet(grammar, firstSet);
 
-        System.out.println(firstSet.getFirstSets());
+        Parser parser = new Parser(grammar, firstSet, followSet);
+        parser.parse(loadSequenceFromFile());
+        System.out.println("=============================================================");
+     //   System.out.println(firstSet.getFirstSets());
         while (true) {
             System.out.println("Select option: ");
             System.out.println("1 -> View FAs ");
@@ -57,5 +63,15 @@ public class Main {
             }
         }
 
+    }
+
+    private static List<String> loadSequenceFromFile() throws FileNotFoundException {
+        List<String> sequence = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File("IO/sequence.txt"))) {
+            while (scanner.hasNextLine()) {
+                sequence.add(scanner.nextLine());
+            }
+        }
+        return sequence;
     }
 }
