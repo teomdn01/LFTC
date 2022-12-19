@@ -5,13 +5,15 @@ public class Main {
     public static void main(String[] args) {
 
        // FiniteAutomaton faLab = new FiniteAutomaton("IO/FA.in");
-        Grammar grammar = new Grammar("D:\\LFTC\\mini-language\\IO\\G3.txt");
+        Grammar grammar = new Grammar("IO/G1.txt");
 
         String baseFilename = "p3";
-        FiniteAutomaton identifierFA = new FiniteAutomaton("D:\\LFTC\\mini-language\\IO\\FAIdentifier.in");
-        FiniteAutomaton constantFA = new FiniteAutomaton("D:\\LFTC\\mini-language\\IO\\FAConstant.in");
-        MiniScanner scanner = new MiniScanner("D:\\LFTC\\mini-language\\IO\\" + baseFilename + ".txt", identifierFA, constantFA);
+        FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
+        FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
+        MiniScanner scanner = new MiniScanner("IO" + baseFilename + ".txt", identifierFA, constantFA);
         FirstSet firstSet = new FirstSet(grammar);
+        FollowSet followSet = new FollowSet(grammar, firstSet);
+
         System.out.println(firstSet.getFirstSets());
         while (true) {
             System.out.println("Select option: ");

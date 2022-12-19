@@ -16,7 +16,7 @@ public class MiniScanner {
     public MiniScanner(String problemFilePath, FiniteAutomaton identifierFA, FiniteAutomaton constantFA) {
         this.problemFilePath = problemFilePath;
         this.symbolTable = new SymbolTable(256);
-        initializeLexic("D:\\LFTC\\mini-language\\IO\\token.txt");
+        initializeLexic("IO/token.txt");
         this.pif = new PIF();
         this.identifierFA = identifierFA;
         this.constantFA = constantFA;
