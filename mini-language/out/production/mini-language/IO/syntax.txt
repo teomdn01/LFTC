@@ -1,17 +1,18 @@
-program = {statement}
-statement = (varDeclaration | arrayDeclaration | assignmentStatament | ifStatement | whileStatement | returnStatement | ioStatement) ";"
-varDeclaration = "var" identifiersList
-identifiersList = identifier {"," identifier}
-arrayDeclaration = "array" "[" constantIntPositive"]" identifiersList "of" type
-type = "int" | "char" | "string"
-assignmentStatement = identifier "=" expression
-expression = intExpression | stringExpression | identifier
-intExpression = constInt| intExpression ("+" | "-" | "*" | "/") intExpression
-stringExpression = constChar| constString| stringExpression + stringExpression
-ifStatement = "if" "(" condition ")" "{" {statement} "}" ["else" "{" {statement} "}" ]
-condition = expression relation expression
-relation = "<" | "<=" | "==" | "!=" | ">=" ">"
-whileStatement = "while" "(" condition ")" "{" {statement} "}"
-returnStatement = "return" expression
-ioStatement= "write" "(" expressionList ")" | ("readInt" | "readChar" | "readString") "(" ")"
-expressionList = expression {"," expression}
+program::=# statement_list #
+statement_list::=statement|statement statement_list
+statement::=simple_statement|struct_statement ;
+simple_statement::=assign_statement|input_output_statement
+assign_statement::=identifier = expression ;
+input_output_statement::=read(identifier);|write(identifier);
+compound_statement::={ declaration_statement ; } statement|{ declaration_statement ; } statement ; compound_statement ;
+declaration_statement::=let type: identifier;
+type::=integer|char|string|bool
+struct_statement::=if_statement|while_statement
+if_statement::=if ( condition ) { compound_statement } else { compound_statement } ;
+while_statement::=while ( condition ) { compound_statement } ;
+condition::=expression relation expression
+relation::===|>|<|>=|<=
+expression::=int_expression|string_expression|identifier
+int_expression::=const_int| int_expression operation int_expression
+operation::=+|-|*|/
+string_expression::=const_char|const_string|string_expression + string_expression
