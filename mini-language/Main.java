@@ -5,12 +5,14 @@ public class Main {
     public static void main(String[] args) {
 
        // FiniteAutomaton faLab = new FiniteAutomaton("IO/FA.in");
-        Grammar grammar = new Grammar("IO/G2.txt");
+        Grammar grammar = new Grammar("D:\\LFTC\\mini-language\\IO\\G3.txt");
 
         String baseFilename = "p3";
-        FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
-        FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
-        MiniScanner scanner = new MiniScanner("IO/" + baseFilename + ".txt", identifierFA, constantFA);
+        FiniteAutomaton identifierFA = new FiniteAutomaton("D:\\LFTC\\mini-language\\IO\\FAIdentifier.in");
+        FiniteAutomaton constantFA = new FiniteAutomaton("D:\\LFTC\\mini-language\\IO\\FAConstant.in");
+        MiniScanner scanner = new MiniScanner("D:\\LFTC\\mini-language\\IO\\" + baseFilename + ".txt", identifierFA, constantFA);
+        FirstSet firstSet = new FirstSet(grammar);
+        System.out.println(firstSet.getFirstSets());
         while (true) {
             System.out.println("Select option: ");
             System.out.println("1 -> View FAs ");
@@ -29,8 +31,8 @@ public class Main {
             }
             else if (option == 2) {
                 scanner.scan();
-                scanner.printSymbolTable("IO/" + baseFilename + "ST.txt");
-                scanner.printPIF("IO/" + baseFilename + "PIF.txt");;
+                scanner.printSymbolTable("D:\\LFTC\\mini-language\\IO\\" + baseFilename + "ST.txt");
+                scanner.printPIF("D:\\LFTC\\mini-language\\IO\\" + baseFilename + "PIF.txt");;
                 System.out.println("Done");
             }
             else if (option == 3) {

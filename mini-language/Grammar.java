@@ -65,7 +65,10 @@ public class Grammar {
     }
 
     public List<List<String>> getProductionsForNonTerminal(List<String> nonTerminal) {
-        return this.productions.get(nonTerminal);
+        if(this.productions.get(nonTerminal) != null){
+            return this.productions.get(nonTerminal);
+        }
+        return new ArrayList<>();
     }
 
     public boolean performCFGCheck() {
