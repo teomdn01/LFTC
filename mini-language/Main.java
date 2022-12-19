@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
        // FiniteAutomaton faLab = new FiniteAutomaton("IO/FA.in");
-        Grammar grammar = new Grammar("IO/G1.txt");
+        Grammar grammar = new Grammar("IO/G3.txt");
 
         String baseFilename = "p3";
         FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");

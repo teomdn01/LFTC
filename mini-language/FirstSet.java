@@ -22,7 +22,7 @@ public class FirstSet {
             newSet.add(element);
             return newSet;
         }
-        return this.firstSets.get(element);
+        return this.firstSets.get(element) == null ? new HashSet<>() : this.firstSets.get(element);
     }
 
     private Set<String> concatenationOfLength1(Set<String> l1, Set<String> l2) {
