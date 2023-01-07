@@ -2,7 +2,10 @@ S@A@B@C@D
 a@+@*@(@)
 S
 S->B A
-A->+ B A|EPS
+A->+ B A
+A->EPS
 B->D C
-C->* D C|EPS
-D->( S )|a
+C->* D C
+C->EPS
+D->( S )
+D->a
