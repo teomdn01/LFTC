@@ -60,11 +60,11 @@ public class ParseTable {
     private void applySecondRule(Map<String, Map<String, Pair<List<String>, Integer>>> table) {
         this.grammar.getTerminals().forEach(terminal -> {
             table.putIfAbsent(terminal, new HashMap<>());
-            table.get(terminal).put(terminal, new Pair<>(List.of("POP"), -1));
+            table.get(terminal).put(terminal, new Pair<>(List.of("POP"), -1)); //POP_CODE
         });
     }
 
     private void applyThirdRule(Map<String, Map<String, Pair<List<String>, Integer>>> table) {
-        table.putIfAbsent("$", Map.of("$", new Pair<>(List.of("ACC"), -2)));
+        table.putIfAbsent("$", Map.of("$", new Pair<>(List.of("ACC"), -2))); // ACCEPTED_CODE
     }
 }

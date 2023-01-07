@@ -95,4 +95,10 @@ public class Grammar {
     public int findCodeForProduction(Pair<String, List<String>> production) {
         return productionCodes.indexOf(production);
     }
+
+    public List<Pair<String, List<String>>> getProductionCodes() {
+        return this.productionCodes;
+    }
+
+
 }
