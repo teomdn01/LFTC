@@ -14,10 +14,11 @@ public class Main {
         FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
         FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
         MiniScanner scanner = new MiniScanner("IO" + baseFilename + ".txt", identifierFA, constantFA);
+
         FirstSet firstSet = new FirstSet(grammar);
         FollowSet followSet = new FollowSet(grammar, firstSet);
-
         Parser parser = new Parser(grammar, firstSet, followSet);
+
         parser.parse(loadSequenceFromFile());
         System.out.println("=============================================================");
      //   System.out.println(firstSet.getFirstSets());
@@ -67,7 +68,7 @@ public class Main {
 
     private static List<String> loadSequenceFromFile() throws FileNotFoundException {
         List<String> sequence = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("IO/sequence.txt"))) {
+        try (Scanner scanner = new Scanner(new File("IO/seq_error.txt"))) {
             while (scanner.hasNextLine()) {
                 sequence.add(scanner.nextLine());
             }

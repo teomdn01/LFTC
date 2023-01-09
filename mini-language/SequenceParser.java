@@ -49,7 +49,7 @@ public class SequenceParser {
                     }
                 }
                 else {
-                    throw new RuntimeException(inputTop + " is not a valid terminal");
+                    throw new RuntimeException(inputTop + " is not a valid terminal. No parsing table entry available for pair " + workingStackTop + "-" + inputTop);
                 }
             }
             else {
