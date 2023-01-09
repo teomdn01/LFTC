@@ -78,3 +78,55 @@ DFA = (“0” {“0”} [“1”]) | “1”
         B->7->C;B->8->C;B->9->C;C->0->C;C->1->C;C->2->C;C->3->C;C->4->C;C->5->C;C->6->C;C->7->C;C->8->C;C->9->C;}
     
 We check the sequencies against these deterministic finite automatas. 
+
+
+## 1. Compute First Set:
+- Representation: Map<String, Set<String>>
+- each non-terminal will be a key in the Map
+- Firstly, for each non-terminal we will iterate through its productions and we will initialize the
+Map with the terminals that appear on the first position in the RHS
+- Then, for each non-terminal we will iterate through its productions and compute the value
+of First in the following way:
+1. if the RHS of the production is empty, then an Exception is thrown
+2. if the RHS contains only one element, the previous value from the FirstSet(RHS) is
+used
+3. if the RHS contains more than one element, a concatenation of length 1 will be
+performed between all elements of the RHS
+ This step is performed until there is no change in the First Set
+
+## 2. Compute Follow Set:
+- Representation: Map<String, set<String>>
+- Initialization: every non-terminal will have an Empty Set as value in the Map, besides the
+starting symbol which will have the symbol “$”
+- For each non-terminal, we look for its occurrences in all productions RHS.
+For each production RHS, we make the corresponding adjustments for the current nonterminal based on the pre-established rules:
+Considering productions are of the form A -> a B b:
+Follow(B) = First(b) + Follow(A)
+If Epsilon is in First(b) or b does not exist, then Follow(B) = Follow(B) + Follow(A)
+This step is performed until there is no change in the Follow Set.
+
+## 3. Compute Parse Table
+- representation: Map<String, Map<String, Pair<List<String>, Integer>>>
+- each cell of the table will have a List of Strings representing the RHS of a production and an
+Integer representing the code of that production or one of the messages “pop” / “accept”
+- there are 3 rules that need to be followed in order to construct the Parse Table:
+1. cell [$, $] = accept
+2. cell[terminal, terminal] = pop
+3. for each production we will get its LHS and its production code.
+If RHS = Epsilon, then for each element of Follow(LHS), cell [LHS, element] = (Epsilon,
+production code)
+Else, for each element of First(LHS), cell [LHS, element] = (RHS, production code)
+In both cases, if there is already a value in the cell [LHS, element], an Exception is
+thrown
+
+## 4. Parsing a sequence
+- We need the Parse Table, an input stack, a working stack and an output stack, all 3 stacks
+being Lists of Strings
+- We look for an entry in the Parse Table for the pair formed between the top of the working
+stack and the top of the input stack
+If that entry corresponds to a push operation, we will go through each element ( different
+from Epsilon) of the RHS of the production we found in that cell and add it in the working
+stack. We will also add in the output stack the production code.
+If that entry corresponds to a pop operation, we remove the top from the input stack
+If that entry corresponds to an accept operation and all we have left in both input stack and
+working stack is the symbol “$”, then parsing is done and the sequence is accepted
