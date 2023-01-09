@@ -13,7 +13,7 @@ public class Main {
         String baseFilename = "p3";
         FiniteAutomaton identifierFA = new FiniteAutomaton("IO/FAIdentifier.in");
         FiniteAutomaton constantFA = new FiniteAutomaton("IO/FAConstant.in");
-        MiniScanner scanner = new MiniScanner("IO" + baseFilename + ".txt", identifierFA, constantFA);
+        MiniScanner scanner = new MiniScanner("IO/" + baseFilename + ".txt", identifierFA, constantFA);
 
         FirstSet firstSet = new FirstSet(grammar);
         FollowSet followSet = new FollowSet(grammar, firstSet);
@@ -68,7 +68,7 @@ public class Main {
 
     private static List<String> loadSequenceFromFile() throws FileNotFoundException {
         List<String> sequence = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("IO/seq_error.txt"))) {
+        try (Scanner scanner = new Scanner(new File("IO/sequence.txt"))) {
             while (scanner.hasNextLine()) {
                 sequence.add(scanner.nextLine());
             }
